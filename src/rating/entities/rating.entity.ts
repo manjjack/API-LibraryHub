@@ -1,1 +1,4 @@
-export class Rating {}
+
+export class Rating {
+    
+}
