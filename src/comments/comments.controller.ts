@@ -13,7 +13,7 @@ export class CommentsController {
 
   @Post()
   async create(@Body() commentData: Comment): Promise<Comment> {
-    return this.commentService.create(commentData.user, commentData.episode);
+    return this.commentService.create(commentData.user, commentData.material);
   }
 
   @Put(':id')
