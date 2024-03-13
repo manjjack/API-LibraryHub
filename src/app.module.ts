@@ -7,6 +7,7 @@ import { RatingModule } from './rating/rating.module';
 import { MaterialModule } from './material/material.module';
 import { TagsModule } from './tags/tags.module';
 import { UserModule } from './user/user.module';
+import { NoMaterialModule } from './no-material/no-material.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { UserModule } from './user/user.module';
       secret: 'LBH',
       // signOptions: { expiresIn: '1h' }, // Configuração opcional para definir o tempo de expiração do token
     }),
+    NoMaterialModule,
   ],
   controllers: [],
   providers: [],

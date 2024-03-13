@@ -30,7 +30,7 @@ export class CommentService {
     );
 
     if (updateResult.affected === 0) {
-      throw new Error('Usuário não encontrado ou a atualização falhou');
+      throw new Error('Comentário não encontrado ou a atualização falhou');
     }
     const comment: Comment = await this.repository.findOne({
       where: {

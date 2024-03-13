@@ -34,7 +34,7 @@ export class MaterialService {
     );
 
     if (updateResult.affected === 0) {
-      throw new Error('Anime não encontrado ou a atualização falhou');
+      throw new Error('Material não encontrado ou a atualização falhou');
     }
     const material: Material = await this.repository.findOne({
       where: {

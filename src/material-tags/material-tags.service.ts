@@ -32,7 +32,7 @@ export class MaterialTagsService {
     );
 
     if (updateResult.affected === 0) {
-      throw new Error('Usuário não encontrado ou a atualização falhou');
+      throw new Error('Material-Tag não encontrado ou a atualização falhou');
     }
     const materialTag: MaterialTag = await this.repository.findOne({
       where: {
