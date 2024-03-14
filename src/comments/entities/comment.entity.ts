@@ -11,7 +11,7 @@ export class Comment {
   @Column()
   content: string;
 
-  @Column({default: () => 'CURRENT_TIMESPAM' })
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   dateTime: Date;
 
   @ManyToOne(() => User, user => user.comments)
