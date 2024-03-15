@@ -4,7 +4,9 @@ import {
   PrimaryGeneratedColumn,
   ManyToOne,
   JoinColumn,
-  OneToMany,ManyToMany, JoinTable
+  OneToMany,
+  ManyToMany,
+  JoinTable
 } from 'typeorm';
 import { User } from 'src/user/entities/user.entity';
 import { Comment } from 'src/comments/entities/comment.entity';
@@ -40,13 +42,23 @@ export class Material {
   urlArquivo: string;
 
   @ManyToOne(() => User)
-  @JoinColumn({ name: 'UserId' })
+  @JoinColumn({ name: 'userId' }) 
   user: User;
 
   @OneToMany(() => Comment, (comment) => comment.material)
   comments: Comment[];
 
-  @ManyToMany(() => Tag, (tag) => tag.nome)
-  @JoinTable({ name: 'tag' })
-  tag: Tag[];
+  @ManyToMany(() => Tag)
+  @JoinTable({
+    name: 'material_tags',
+    joinColumn: {
+      name: 'materialId',
+      referencedColumnName: 'materialId'
+    },
+    inverseJoinColumn: {
+      name: 'id',
+      referencedColumnName: 'id'
+    }
+  })
+  tag: Tag[]; 
 }

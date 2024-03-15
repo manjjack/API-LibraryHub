@@ -7,16 +7,16 @@ export class User {
   @PrimaryGeneratedColumn()
   userId: number;
 
-  @Column()
+  @Column({unique: true})
   username: string;
 
-  @Column()
+  @Column({unique: true})
   email: string;
 
   @Column()
   password: string;
 
-  @Column()
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
   dataCadastro: Date;
 
   @Column()

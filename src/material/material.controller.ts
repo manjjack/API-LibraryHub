@@ -11,7 +11,7 @@ export class MaterialController {
     return this.materialService.findAll();
   }
 
-  @Post(':userId')
+  @Post()
   async create(@Param('userId') userId: number): Promise<Material> {
     return this.materialService.create(userId);
   }
