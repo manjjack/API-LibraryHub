@@ -8,6 +8,7 @@ import { MaterialModule } from './material/material.module';
 import { TagsModule } from './tags/tags.module';
 import { UserModule } from './user/user.module';
 import { NoMaterialModule } from './no-material/no-material.module';
+import { AdminModule } from './admin/admin.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { NoMaterialModule } from './no-material/no-material.module';
       // signOptions: { expiresIn: '1h' }, // Configuração opcional para definir o tempo de expiração do token
     }),
     NoMaterialModule,
+    AdminModule,
   ],
   controllers: [],
   providers: [],

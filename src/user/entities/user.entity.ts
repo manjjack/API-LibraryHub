@@ -22,6 +22,8 @@ export class User {
   @Column()
   imgUrl: string;
   
+  @Column({default: false})
+  status: boolean;
   @OneToMany(() => Material, material => material.user)
   Materiais: Material[];
 
