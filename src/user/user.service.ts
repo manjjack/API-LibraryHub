@@ -57,6 +57,7 @@ export class UserService {
     const isMatch = bcrypt.compareSync(password, hashedPassword);
     return isMatch;
   }
+  
 
   async login(
     username: string,

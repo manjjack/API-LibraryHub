@@ -5,7 +5,7 @@ import {
   Body,
   Patch,
   Param,
-  Delete,
+  Delete, UnauthorizedException
 } from '@nestjs/common';
 import { AdminService } from './admin.service';
 import { Admin } from './entities/admin.entity';
@@ -58,6 +58,24 @@ export class AdminController {
       await this.adminService.changeUserStatus(userId, newStatus);
     } catch (error) {
       throw new Error(`Erro ao alterar o status do usuário: ${error.message}`);
+    }
+  }
+
+  @Post('login')
+  async login(
+    @Body() body: { username: string; password: string },
+  ): Promise<{ admin: Admin; accessToken: string }> {
+    const { username, password } = body;
+
+    try {
+      const { admin, accessToken } = await this.adminService.login(
+        username,
+        password,
+      );
+
+      return { admin, accessToken };
+    } catch (error) {
+      throw new UnauthorizedException('Credenciais inválidas');
     }
   }
 }
