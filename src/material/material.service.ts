@@ -15,7 +15,8 @@ export class MaterialService {
   async findAll(): Promise<Material[]> {
     return this.repository.find();
   }
-
+  
+  // funcao resposavel por comparar se o material pode ser alancado ou nao
   async verificarExistencia(titulo: string, autor: string, categoria: string) {
     const existencia = await this.noRepository.findOne({
       where: {
@@ -24,7 +25,7 @@ export class MaterialService {
         categoria: categoria,
       },
     });
-    return !!existencia; //Retorna true se existir, false se não existir
+    return !!existencia; 
   }
 
   async create(idUser: number): Promise<Material> {
@@ -75,7 +76,10 @@ export class MaterialService {
       },
     });
   }
-  // procura pelo nome
+  
+  // Filtros de Pesquisa 
+
+  // procura pelo nome do material
   async findByName(name: string): Promise<Material[]> {
     return this.repository.find({
       where: {
@@ -84,7 +88,7 @@ export class MaterialService {
     });
   }
 
-  // procura pelo autor
+  // procura pelo autor do material
   async findByAutor(name: string): Promise<Material[]> {
     return this.repository.find({
       where: {
@@ -93,6 +97,7 @@ export class MaterialService {
     });
   }
 
+  // pesquisa do material por tags(#motivacional, #educacional e etc)
   async findByTag(tag: string): Promise<Material[]> {
     const materials = await this.repository
       .createQueryBuilder('material')

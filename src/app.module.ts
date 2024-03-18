@@ -9,6 +9,7 @@ import { TagsModule } from './tags/tags.module';
 import { UserModule } from './user/user.module';
 import { NoMaterialModule } from './no-material/no-material.module';
 import { AdminModule } from './admin/admin.module';
+import { FollowersModule } from './followers/followers.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { AdminModule } from './admin/admin.module';
     }),
     NoMaterialModule,
     AdminModule,
+    FollowersModule,
   ],
   controllers: [],
   providers: [],

@@ -14,12 +14,12 @@ export class CommentService {
   }
 
   async create(idUser: number, idMaterial: number): Promise<Comment> {
-    // Cria uma nova instância de Animestype com os IDs do anime e do genero
+    
     const comment = new Comment();
     comment.user = idUser;
     comment.material = idMaterial;
 
-    // Salva o objeto AnimeType no banco de dados
+    
     return this.repository.save(comment);
   }
 

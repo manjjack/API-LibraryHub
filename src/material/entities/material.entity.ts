@@ -11,7 +11,7 @@ import {
 import { User } from 'src/user/entities/user.entity';
 import { Comment } from 'src/comments/entities/comment.entity';
 import { Tag } from 'src/tags/entities/tag.entity';
-
+import { Rating } from 'src/rating/entities/rating.entity';
 @Entity()
 export class Material {
   @PrimaryGeneratedColumn()
@@ -38,6 +38,9 @@ export class Material {
   @Column({ type: 'longblob', nullable: true })
   arquivo: Buffer;
 
+  @Column()
+  rating : number;
+
   @Column({ nullable: true })
   urlArquivo: string;
 
@@ -47,6 +50,9 @@ export class Material {
 
   @OneToMany(() => Comment, (comment) => comment.material)
   comments: Comment[];
+  
+  @OneToMany(() => Rating, rating => rating.material)
+  ratings: Rating[];
 
   @ManyToMany(() => Tag)
   @JoinTable({

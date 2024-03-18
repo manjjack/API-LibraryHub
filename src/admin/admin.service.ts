@@ -55,21 +55,21 @@ export class AdminService {
     const resultado: DeleteResult = await this.userRepository.delete(id);
     return resultado;
   }
+  
 
+  // Funcao reponsavel or alterar o status da conta do user de ativo para inativo
   async changeUserStatus(
     userId: number,
     newStatus: boolean,
   ): Promise<void> {
     try {
-      // Encontrar o usuário
-      const userToUpdate: User | undefined = await this.repository.findOne({ where: { userId } });
+      
+      const user: User | undefined = await this.repository.findOne({ where: { userId } });
   
-      // Verificar se o usuário foi encontrado
-      if (!userToUpdate) {
+      if (!user) {
         throw new Error('Usuário não encontrado.');
       }
   
-      // Atualizar o status do usuário na base de dados
       await this.repository.update({ userId }, { status: newStatus });
   
       console.log(
@@ -81,6 +81,7 @@ export class AdminService {
     }
   }
 
+  
   async login(
     username: string,
     password: string,
@@ -92,7 +93,6 @@ export class AdminService {
       throw new UnauthorizedException('Credenciais inválidas');
     }
 
-    // Gera o token de acesso JWT com base nos dados do usuário
     const payload = { username: admin.username, sub: admin.adminId };
     const accessToken = this.jwtService.sign(payload);
 

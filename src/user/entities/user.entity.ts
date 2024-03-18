@@ -1,7 +1,7 @@
 import { PrimaryGeneratedColumn, Column, Entity, OneToMany } from 'typeorm';
 import { Material } from 'src/material/entities/material.entity';
 import { Comment } from 'src/comments/entities/comment.entity';
-
+import { Rating } from 'src/rating/entities/rating.entity';
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
@@ -24,10 +24,14 @@ export class User {
   
   @Column({default: false})
   status: boolean;
+
   @OneToMany(() => Material, material => material.user)
   Materiais: Material[];
 
   @OneToMany(() => Comment, comment => comment.user)
   comments: Comment[];
+
+  @OneToMany(() => Rating, rating => rating.user)
+  ratings: Rating[];
 
 }

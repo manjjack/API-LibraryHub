@@ -9,6 +9,7 @@ export class NoMaterialService {
     private repository: Repository<NoMaterial>,
   ) {}
 
+  // Entidade responsavel por verificar a veracidade de um material
   async create(noMaterial: NoMaterial): Promise<NoMaterial> {
     return this.repository.save(noMaterial);
   }

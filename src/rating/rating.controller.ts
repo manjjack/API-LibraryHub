@@ -1,34 +1,42 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Put, Param, Delete } from '@nestjs/common';
 import { RatingService } from './rating.service';
-import { CreateRatingDto } from './dto/create-rating.dto';
-import { UpdateRatingDto } from './dto/update-rating.dto';
+import { Rating } from './entities/rating.entity';
+import { Anime } from 'src/anime/entities/anime.entity';
 
 @Controller('rating')
 export class RatingController {
   constructor(private readonly ratingService: RatingService) {}
 
-  @Post()
-  create(@Body() createRatingDto: CreateRatingDto) {
-    return this.ratingService.create(createRatingDto);
+  @Post(':animeId/:userId')
+  async create(@Param('animeId') animeId: number, @Param('userId') userId: number): Promise<Rating> {
+    return this.ratingService.create(animeId, userId);
   }
 
-  @Get()
-  findAll() {
-    return this.ratingService.findAll();
+  @Put(':id')
+  async update(@Param('id') id: number, @Body() updatedRating: Partial<Rating>): Promise<Rating> {
+    return this.ratingService.update(id, updatedRating);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.ratingService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateRatingDto: UpdateRatingDto) {
-    return this.ratingService.update(+id, updateRatingDto);
+  async findOne(@Param('id') id: number): Promise<Rating> {
+    return this.ratingService.findOne(id);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.ratingService.remove(+id);
+  async delete(@Param('id') id: number): Promise<void> {
+    await this.ratingService.delete(id);
+  }
+
+  @Get()
+  async calculateRanking(): Promise<Anime[]> {
+    return this.ratingService.calculateRanking();
+  }
+
+  @Get(':idAnime/:idUser')
+  async findRatingAnime(
+    @Param('idAnime') idAnime: number,
+    @Param('idUser') idUser: number,
+  ): Promise<Rating> {
+    return this.ratingService.findRatingAnime(idAnime, idUser);
   }
 }
